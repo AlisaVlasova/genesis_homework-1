@@ -1,11 +1,4 @@
-import Vue from "vue";
-import Vuex from "vuex";
-
-import pagination from "./pagination";
-
-Vue.use(Vuex);
-
-export default new Vuex.Store({
+export default {
   state: {
     trendingFeed: null,
     userFeed: null,
@@ -83,7 +76,4 @@ export default new Vuex.Store({
       context.commit("setSlicedFeed", slicedValue);
     },
   },
-  modules: {
-    pagination,
-  },
-});
+};

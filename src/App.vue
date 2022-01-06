@@ -45,7 +45,7 @@ export default {
     display: flex;
   }
 
-  span.header-text {
+  .header-text {
     display: none;
 
     font-weight: bold;

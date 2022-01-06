@@ -62,7 +62,7 @@ export default {
   },
   methods: {
     ...mapMutations(["setUserInfo", "setUserFeed"]),
-    async get() {
+    async getFeedData() {
       this.isLoading = true;
       this.isError = false;
 
@@ -77,7 +77,7 @@ export default {
     },
   },
   beforeMount() {
-    this.get();
+    this.getFeedData();
   },
 };
 </script>

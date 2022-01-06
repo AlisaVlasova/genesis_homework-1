@@ -66,7 +66,7 @@
 <script>
 export default {
   name: "Post",
-  props: ["post"],
+  props: { post: Number },
   methods: {
     getElementVisible(id) {
       const target = document.getElementById(id);

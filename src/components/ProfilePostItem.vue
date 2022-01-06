@@ -26,7 +26,7 @@
 <script>
 export default {
   name: "Post",
-  props: ["post"],
+  props: { post: Number },
 };
 </script>
 

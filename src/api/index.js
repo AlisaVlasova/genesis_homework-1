@@ -15,18 +15,17 @@ const defaultOptions = {
 };
 
 const getData = (url, options) => {
-  try {
-    return fetch(url, options)
-      .then((response) => {
-        return response.json();
-      })
-      .then((res) => {
-        return res;
-      });
-  } catch (error) {
-    console.log(error);
-    throw new Error(error);
-  }
+  return fetch(url, options)
+    .then((response) => {
+      return response.json();
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw new Error(error);
+    });
 };
 
 export const getTrendingFeedData = async () => {
