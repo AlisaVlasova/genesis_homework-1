@@ -1,6 +1,6 @@
 <template>
   <v-container class="profile">
-    <div v-if="!isLoading">
+    <div v-if="!isLoading" data-test="profile-content">
       <div class="profile__info" v-if="getUserInfo">
         <v-avatar class="profile__avatar" width="100px" height="100px">
           <img
@@ -14,7 +14,7 @@
         <v-row class="profile__stats">
           <v-col class="profile__stats-item">
             {{ getUserInfo.stats.followerCount }}
-            <p>Подпищики</p>
+            <p>Подписчики</p>
           </v-col>
           <v-col class="profile__stats-item">
             {{ getUserInfo.stats.followingCount }}
@@ -31,11 +31,16 @@
 
     <v-progress-circular
       class="profile__loader"
+      data-test="profile-loader"
       indeterminate
       v-if="isLoading"
     ></v-progress-circular>
 
-    <p class="profile__error" v-if="!isLoading && isError">
+    <p
+      class="profile__error"
+      v-if="!isLoading && isError"
+      data-test="profile-error"
+    >
       Something went wrong :(<br />
       Please try again later
     </p>
@@ -46,7 +51,8 @@
 import ProfilePostList from "@/components/ProfilePostList";
 
 import { mapGetters, mapMutations } from "vuex";
-import { getUserInfoData, getUserFeedData } from "@/api";
+import { getUserInfoData } from "@/api/getUserInfoData.js";
+import { getUserFeedData } from "@/api/getUserFeedData.js";
 
 export default {
   name: "Profile",
@@ -67,16 +73,19 @@ export default {
       this.isError = false;
 
       try {
-        this.setUserInfo(await getUserInfoData(this.$route.params.id));
-        this.setUserFeed(await getUserFeedData(this.$route.params.id));
-      } catch {
+        const userInfo = await getUserInfoData(this.$route.params.id);
+        const userFeed = await getUserFeedData(this.$route.params.id);
+
+        this.setUserInfo(userInfo);
+        this.setUserFeed(userFeed);
+      } catch (error) {
         this.isError = true;
       } finally {
         this.isLoading = false;
       }
     },
   },
-  beforeMount() {
+  mounted() {
     this.getFeedData();
   },
 };

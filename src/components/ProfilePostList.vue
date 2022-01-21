@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
+import { mapGetters } from "vuex";
 
 import ProfilePostItem from "@/components/ProfilePostItem";
 
@@ -24,9 +24,6 @@ export default {
   },
   computed: {
     ...mapGetters(["getUserFeed"]),
-  },
-  methods: {
-    ...mapMutations(["setUserFeed"]),
   },
 };
 </script>

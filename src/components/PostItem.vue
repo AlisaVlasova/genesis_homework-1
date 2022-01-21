@@ -64,34 +64,14 @@
 </template>
 
 <script>
+import { getElementVisible } from "@/helpers/getElementVisible.js";
+
 export default {
   name: "Post",
-  props: { post: Number },
+  props: ["post"],
   methods: {
-    getElementVisible(id) {
-      const target = document.getElementById(id);
-      const targetPosition = {
-        top: window.pageYOffset + target.getBoundingClientRect().top,
-        left: window.pageXOffset + target.getBoundingClientRect().left,
-        right: window.pageXOffset + target.getBoundingClientRect().right,
-        bottom: window.pageYOffset + target.getBoundingClientRect().bottom,
-      };
-      const windowPosition = {
-        top: window.pageYOffset,
-        left: window.pageXOffset,
-        right: window.pageXOffset + document.documentElement.clientWidth,
-        bottom: window.pageYOffset + document.documentElement.clientHeight,
-      };
-
-      return (
-        targetPosition.bottom > windowPosition.top &&
-        targetPosition.top < windowPosition.bottom &&
-        targetPosition.right > windowPosition.left &&
-        targetPosition.left < windowPosition.right
-      );
-    },
     play() {
-      if (this.getElementVisible(this.post.id)) {
+      if (getElementVisible(this.post.id)) {
         this.$refs[this.post.id].play();
       } else {
         this.$refs[this.post.id].pause();

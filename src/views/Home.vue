@@ -1,14 +1,15 @@
 <template>
   <v-container class="home">
-    <post-list v-if="!isLoading && !isError" />
+    <post-list data-test="home-list" v-if="!isLoading && !isError" />
 
     <v-progress-circular
+      data-test="home-loader"
       class="home__loader"
       indeterminate
       v-if="isLoading && !isError"
     ></v-progress-circular>
 
-    <p class="home__error" v-if="!isLoading && isError">
+    <p data-test="home-error" class="home__error" v-if="!isLoading && isError">
       Something went wrong :(<br />
       Please try again later
     </p>
@@ -19,7 +20,7 @@
 import PostList from "../components/PostList";
 
 import { mapGetters, mapActions } from "vuex";
-import { getTrendingFeedData } from "@/api";
+import { getTrendingFeedData } from "@/api/getTrendingFeedData.js";
 
 export default {
   name: "Home",
@@ -40,15 +41,17 @@ export default {
       this.isError = false;
 
       try {
-        this.setTrendingFeed(await getTrendingFeedData());
-      } catch {
+        const data = await getTrendingFeedData();
+
+        this.setTrendingFeed(data);
+      } catch (error) {
         this.isError = true;
       } finally {
         this.isLoading = false;
       }
     },
   },
-  beforeMount() {
+  mounted() {
     this.getFeedData();
   },
 };
