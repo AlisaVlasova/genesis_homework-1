@@ -1,16 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import feed from "./feed";
-import user from "./user";
+import feed from "./feed/index";
+import user from "./user/index";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {},
-  getters: {},
-  mutations: {},
-  actions: {},
   modules: {
     feed,
     user,

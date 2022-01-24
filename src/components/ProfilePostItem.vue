@@ -5,17 +5,18 @@
     :title="post.desc"
   >
     <video playsinline controls loop>
-      <!-- Use post.video.playAddr when Get User Feed works (if you don't know what is this about go to @/api) -->
-      <source :src="post.videoUrl" type="video/mp4" />
+      <source
+        :src="post.videoUrl"
+        type="video/mp4"
+        data-test="profile-post-video"
+      />
     </video>
 
     <v-row class="post__top">
-      <div class="post__play">
+      <div class="post__play" data-test="profile-post-play">
         <div class="post__icon">
           <v-icon>mdi-play</v-icon>
         </div>
-
-        <!-- Use {{ post.stats.playCont }} when Get User Feed works (if you don't know what is this about go to @/api) -->
 
         {{ post.playCount }}
       </div>

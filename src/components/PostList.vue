@@ -14,7 +14,7 @@
     <v-pagination
       class="post-list__pagination"
       v-model="page"
-      @input="(event) => updatePage(event)"
+      @input="(event) => setCurrentPage(event)"
       :length="pagesCount"
       color="rgba(22, 24, 35, 0.75)"
     ></v-pagination>
@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 import PostItem from "@/components/PostItem";
 
@@ -46,7 +46,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["updatePage"]),
+    ...mapMutations(["setCurrentPage"]),
   },
 };
 </script>

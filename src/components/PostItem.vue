@@ -2,18 +2,26 @@
   <v-container class="post">
     <router-link :to="`/profile/${post.authorMeta.name}`">
       <v-avatar class="post__avatar">
-        <img :src="post.authorMeta.avatar" :alt="post.authorMeta.nickName" />
+        <img
+          :src="post.authorMeta.avatar"
+          :alt="post.authorMeta.nickName"
+          data-test="post-avatar"
+        />
       </v-avatar>
     </router-link>
 
     <div class="post__content">
-      <p class="post__nick">
+      <p class="post__nick" data-test="post-nickname">
         {{ post.authorMeta.nickName }}
       </p>
-      <p class="post__text">
+      <p class="post__text" data-test="post-text">
         {{ post.text }}
       </p>
-      <ul class="post__mentions" v-if="post.mentions.length">
+      <ul
+        class="post__mentions"
+        v-if="post.mentions.length"
+        data-test="post-mentions"
+      >
         <li
           class="post__mention"
           v-for="mention of post.mentions"
@@ -22,36 +30,42 @@
           {{ mention }}
         </li>
       </ul>
-      <ul class="post__tags" v-if="post.hashtags.length">
+      <ul class="post__tags" v-if="post.hashtags.length" data-test="post-tags">
         <li class="post__tag" v-for="tag of post.hashtags" :key="tag.name">
           #{{ tag.name }}
         </li>
       </ul>
-      <p class="post__music">
+      <p class="post__music" data-test="post-music">
         <strong>Original sound</strong> - {{ post.musicMeta.musicName }}
       </p>
 
       <div class="post__video-container">
         <div class="post__video">
           <video :ref="post.id" controls loop muted>
-            <source :src="post.videoUrl" type="video/mp4" />
+            <source
+              data-test="post-video"
+              :src="post.videoUrl"
+              type="video/mp4"
+            />
           </video>
         </div>
 
         <div class="post__side-bar">
-          <div class="post__likes post__side-item">
+          <div class="post__likes post__side-item" data-test="post-hearts">
             <div class="post__icon">
               <v-icon>mdi-heart</v-icon>
             </div>
             {{ post.diggCount }}
           </div>
-          <div class="post__comments post__side-item">
+          <div class="post__comments post__side-item" data-test="post-comments">
+            >
             <div class="post__icon">
               <v-icon>mdi-comment</v-icon>
             </div>
             {{ post.commentCount }}
           </div>
-          <div class="post__share post__side-item">
+          <div class="post__share post__side-item" data-test="post-shares">
+            >
             <div class="post__icon">
               <v-icon>mdi-share</v-icon>
             </div>

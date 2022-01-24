@@ -6,21 +6,22 @@
           <img
             :src="getUserInfo.user.avatarLarger"
             :alt="getUserInfo.user.nickname"
+            data-test="profile-avatar"
           />
         </v-avatar>
-        <p class="profile__name">
+        <p class="profile__name" data-test="profile-nickname">
           {{ getUserInfo.user.nickname }}
         </p>
         <v-row class="profile__stats">
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-followers">
             {{ getUserInfo.stats.followerCount }}
             <p>Подписчики</p>
           </v-col>
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-followings">
             {{ getUserInfo.stats.followingCount }}
             <p>Подписки</p>
           </v-col>
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-hearts">
             {{ getUserInfo.stats.heartCount }}
             <p>Лайки</p>
           </v-col>

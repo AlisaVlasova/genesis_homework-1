@@ -19,7 +19,7 @@
 <script>
 import PostList from "../components/PostList";
 
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { getTrendingFeedData } from "@/api/getTrendingFeedData.js";
 
 export default {
@@ -35,7 +35,7 @@ export default {
     ...mapGetters(["getTrendingFeed"]),
   },
   methods: {
-    ...mapActions(["setTrendingFeed"]),
+    ...mapMutations(["setTrendingFeed"]),
     async getFeedData() {
       this.isLoading = true;
       this.isError = false;
