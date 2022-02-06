@@ -24,7 +24,7 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 
-import PostItem from "@/components/PostItem";
+import { PostItem } from "tiktuk-post";
 
 export default {
   name: "PostList",

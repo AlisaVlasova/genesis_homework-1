@@ -1,4 +1,6 @@
 const { ESBuildMinifyPlugin } = require("esbuild-loader");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const esbuild = require("esbuild");
 
@@ -30,7 +32,7 @@ module.exports = {
       ],
     },
 
-    plugins: [new MiniCssExtractPlugin()],
+    plugins: [new MiniCssExtractPlugin(), new BundleAnalyzerPlugin()],
   },
 
   lintOnSave: false,
