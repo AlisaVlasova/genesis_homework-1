@@ -1,26 +1,27 @@
 <template>
   <v-container class="profile">
-    <div v-if="!isLoading">
+    <div v-if="!isLoading" data-test="profile-content">
       <div class="profile__info" v-if="getUserInfo">
         <v-avatar class="profile__avatar" width="100px" height="100px">
           <img
             :src="getUserInfo.user.avatarLarger"
             :alt="getUserInfo.user.nickname"
+            data-test="profile-avatar"
           />
         </v-avatar>
-        <p class="profile__name">
+        <p class="profile__name" data-test="profile-nickname">
           {{ getUserInfo.user.nickname }}
         </p>
         <v-row class="profile__stats">
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-followers">
             {{ getUserInfo.stats.followerCount }}
-            <p>Подпищики</p>
+            <p>Подписчики</p>
           </v-col>
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-followings">
             {{ getUserInfo.stats.followingCount }}
             <p>Подписки</p>
           </v-col>
-          <v-col class="profile__stats-item">
+          <v-col class="profile__stats-item" data-test="profile-hearts">
             {{ getUserInfo.stats.heartCount }}
             <p>Лайки</p>
           </v-col>
@@ -31,11 +32,16 @@
 
     <v-progress-circular
       class="profile__loader"
+      data-test="profile-loader"
       indeterminate
       v-if="isLoading"
     ></v-progress-circular>
 
-    <p class="profile__error" v-if="!isLoading && isError">
+    <p
+      class="profile__error"
+      v-if="!isLoading && isError"
+      data-test="profile-error"
+    >
       Something went wrong :(<br />
       Please try again later
     </p>
@@ -46,7 +52,8 @@
 import ProfilePostList from "@/components/ProfilePostList";
 
 import { mapGetters, mapMutations } from "vuex";
-import { getUserInfoData, getUserFeedData } from "@/api";
+import { getUserInfoData } from "@/api/getUserInfoData.js";
+import { getUserFeedData } from "@/api/getUserFeedData.js";
 
 export default {
   name: "Profile",
@@ -67,16 +74,19 @@ export default {
       this.isError = false;
 
       try {
-        this.setUserInfo(await getUserInfoData(this.$route.params.id));
-        this.setUserFeed(await getUserFeedData(this.$route.params.id));
-      } catch {
+        const userInfo = await getUserInfoData(this.$route.params.id);
+        const userFeed = await getUserFeedData(this.$route.params.id);
+
+        this.setUserInfo(userInfo);
+        this.setUserFeed(userFeed);
+      } catch (error) {
         this.isError = true;
       } finally {
         this.isLoading = false;
       }
     },
   },
-  beforeMount() {
+  mounted() {
     this.getFeedData();
   },
 };
