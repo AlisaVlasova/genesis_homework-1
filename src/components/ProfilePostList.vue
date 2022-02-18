@@ -15,7 +15,7 @@
 <script>
 import { mapGetters } from "vuex";
 
-import ProfilePostItem from "@/components/ProfilePostItem";
+import { ProfilePostItem } from "tiktuk-post";
 
 export default {
   name: "ProfilePostList",
